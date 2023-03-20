@@ -3,10 +3,12 @@ ARG VARIANT=3-bullseye
 FROM mcr.microsoft.com/devcontainers/ruby:${VARIANT}
 
 # Install Rails
-RUN gem install rails webdrivers
+RUN gem install rails webdrivers \
+# @prettier/plugin-ruby
+bundler prettier_print syntax_tree syntax_tree-haml syntax_tree-rbs
 
 # Default value to allow debug server to serve content over GitHub Codespace's port forwarding service
-# The value is a comma-separated list of allowed domains 
+# The value is a comma-separated list of allowed domains
 ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.app.github.dev"
 
 # [Choice] Node.js version: lts/*, 16, 14, 12, 10
