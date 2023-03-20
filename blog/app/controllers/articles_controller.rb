@@ -3,5 +3,7 @@ class ArticlesController < ApplicationController
     # ビューを明示的にレンダリングしない場合や HTTP レスポンスをトリガーしない場合
     # コントローラ名とアクション名にマッチするビューが自動的にレンダリングされる
     # （この場合 app/views/articles/index.html.erb）
+
+    @articles = Article.all
   end
 end
