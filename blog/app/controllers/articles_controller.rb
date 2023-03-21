@@ -10,4 +10,27 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
   end
+
+  # 新しい記事を1件インスタンス化、データベースには保存しない
+  def new
+    @article = Article.new
+  end
+
+  # タイトルと本文を持つ新しい記事をインスタンス化し、データベースへ保存
+  def create
+    @article = Article.new(article_params)
+
+    if @article.save
+      redirect_to @article
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def article_params
+    # 許容するフィールドを指定してフィルター
+    params.require(:article).permit(:title, :body)
+  end
 end
